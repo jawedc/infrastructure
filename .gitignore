@@ -1,2 +1,3 @@
 iac/terraform/secret.tfvars
 iac/terraform/.terraform/
+iac/terraform/.terraform.lock.hcl
