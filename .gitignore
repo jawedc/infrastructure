@@ -1,1 +1,2 @@
 iac/terraform/secret.tfvars
+iac/terraform/.terraform/
