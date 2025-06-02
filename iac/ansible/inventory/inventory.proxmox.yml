@@ -1,0 +1,25 @@
+---
+plugin: community.general.proxmox
+
+validate_certs: false
+
+# ──────────────────────────────────────────────────
+# 1) Cette section doit venir en tout premier !
+# ──────────────────────────────────────────────────
+want_proxmox_nodes_ansible_host: false
+want_facts: true
+
+compose:
+  ansible_host: proxmox_agent_interfaces[1]['ip-addresses'][0].split('/')[0]
+  ansible_user: ansible
+
+filters:
+  - proxmox_status == 'running'
+
+# ──────────────────────────────────────────────────
+# 2) On fait directement 3 groupes à partir de vos tags
+# ──────────────────────────────────────────────────
+groups:
+  server:      "'k3s-master' in (proxmox_tags_parsed | list)"
+  agent:       "'k3s-agent'  in (proxmox_tags_parsed | list)"
+  k3s_cluster: "'k3s-cluster' in (proxmox_tags_parsed | list)"

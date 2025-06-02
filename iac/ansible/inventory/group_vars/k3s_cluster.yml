@@ -1,0 +1,8 @@
+---
+proxmox_token_secret: "{{ lookup('ansible.builtin.env', 'PROXMOX_TOKEN_SECRET') }}"
+k3s_version:  "v1.33.1+k3s1"
+# ansible-vault encrypt_string '…' --name 'token' pour chiffrer
+token:        "changeme!"
+api_endpoint: "{{ hostvars[groups['server'][0]].ansible_host }}"
+ansible_port: 22          # vous pouvez aussi le mettre dans compose
+ansible_user: ansible     # idem
