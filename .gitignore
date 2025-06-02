@@ -1,6 +1,5 @@
 iac/terraform/secret.tfvars
 
-iac/terraform/envs/homelab/.terraform/
-iac/terraform/envs/homelab/.terraform.lock.hcl
-iac/terraform/envs/homelab/terraform.tfstate
-iac/terraform/envs/homelab/terraform.tfstate.*
+**/.terraform/
+**/.terraform.lock.hcl
+**/terraform.tfstate*
