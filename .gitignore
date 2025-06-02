@@ -3,3 +3,8 @@ iac/terraform/.terraform/
 iac/terraform/.terraform.lock.hcl
 iac/terraform/terraform.tfstate
 iac/terraform/terraform.tfstate.*
+
+iac/terraform/envs/homelab/.terraform/
+iac/terraform/envs/homelab/.terraform.lock.hcl
+iac/terraform/envs/homelab/terraform.tfstate
+iac/terraform/envs/homelab/terraform.tfstate.*

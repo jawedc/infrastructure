@@ -1,3 +1,0 @@
-[submodule "iac/ansible/roles/k3s-ansible"]
-	path = iac/ansible/roles/k3s-ansible
-	url = https://github.com/k3s-io/k3s-ansible.git
