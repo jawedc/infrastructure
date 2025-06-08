@@ -1,0 +1,6 @@
+---
+argocd_version: v2.10.5
+argocd_namespace: infrastructure
+argocd_ingress_enabled: true
+argocd_ingress_hosts: []
+argocd_ingress_tls_enabled: false

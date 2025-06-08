@@ -1,0 +1,45 @@
+---
+- name: Paquets système pour pip (Debian/Ubuntu)
+  apt:
+    name:
+      - python3-pip
+      - python3-setuptools
+    state: present
+    update_cache: true
+  when: ansible_os_family == 'Debian'
+
+- name: Installer python3-kubernetes (dépôt distro)
+  apt:
+    name: python3-kubernetes
+    state: present
+
+- name: « {{ argocd_namespace }} » namespace
+  kubernetes.core.k8s:
+    api_version: v1
+    kind: Namespace
+    name: "{{ argocd_namespace }}"
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+
+- name: Add/Update Argo CD repo
+  kubernetes.core.helm_repository:
+    name: argo
+    repo_url: https://argoproj.github.io/argo-helm
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+
+# --- override Helm values (Ingress catch-all) ------------
+- name: Générer le fichier values.yaml
+  template:
+    src: values.yaml.j2              # chemin relatif au rôle
+    dest: /tmp/argocd-values-{{ inventory_hostname }}.yaml
+
+- name: Install/upgrade Argo CD via Helm
+  kubernetes.core.helm:
+    name: argocd
+    chart_ref: argo/argo-cd
+    release_namespace: "{{ argocd_namespace }}"
+    create_namespace: false          # déjà créé plus haut
+    values_files:
+      - /tmp/argocd-values-{{ inventory_hostname }}.yaml
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+    update_repo_cache: true
+    reset_values: true

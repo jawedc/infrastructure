@@ -19,3 +19,17 @@
   become: true
   roles:
     - role: k3s_agent
+
+- name: Installer Helm
+  hosts: server
+  become: true
+  roles:
+    - role: geerlingguy.helm
+      vars:
+        helm_version: v3.15.2
+
+- name: Déployer Argo CD
+  hosts: server
+  become: true
+  roles:
+    - role: argocd

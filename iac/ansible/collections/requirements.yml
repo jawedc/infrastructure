@@ -4,5 +4,7 @@ collections:
   - name: ansible.posix
   - name: community.kubernetes
   - name: kubernetes.core
+    version: ">=2.4.0"
 roles:
-  - name: xunholy.argocd      # pour l’install Argo CD (optionnel)
+  - name: geerlingguy.helm
+    version: 1.0.1
