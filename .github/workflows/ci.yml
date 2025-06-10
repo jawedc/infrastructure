@@ -10,4 +10,4 @@ jobs:
         run: |
           pip install ansible-core
       - name: Syntax-check
-        run: ansible-playbook iac/ansible/playbooks/site.yml --syntax-check
+        run: ansible-playbook -i iac/ansible/inventory/proxmox.yml iac/ansible/playbooks/site.yml --syntax-check
