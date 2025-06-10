@@ -5,9 +5,16 @@ jobs:
   ansible-syntax:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4     # clone le repo
-      - name: Install Ansible core
+      - uses: actions/checkout@v4
+      - name: Install Ansible & galaxy deps
         run: |
           pip install ansible-core
+          ansible-galaxy collection install -r iac/ansible/collections/requirements.yml
+          # si tu as un fichier requirements.yml pour les rôles :
+          ansible-galaxy role install -r iac/ansible/requirements.yml
+          
       - name: Syntax-check
-        run: ansible-playbook -i iac/ansible/inventory/proxmox.yml iac/ansible/playbooks/site.yml --syntax-check
+        run: |
+          ansible-playbook -i iac/ansible/inventory/proxmox.yml \
+                           iac/ansible/playbooks/site.yml \
+                           --syntax-check
