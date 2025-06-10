@@ -1,0 +1,13 @@
+name: ci
+on: [push, pull_request]
+
+jobs:
+  ansible-syntax:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4     # clone le repo
+      - name: Install Ansible core
+        run: |
+          pip install ansible-core
+      - name: Syntax-check
+        run: ansible-playbook iac/ansible/playbooks/site.yml --syntax-check
