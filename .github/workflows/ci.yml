@@ -3,7 +3,7 @@ on: [push, pull_request]
 
 jobs:
   ansible-syntax:
-    runs-on: self-hosted
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4     # clone le repo
       - name: Install Ansible core
